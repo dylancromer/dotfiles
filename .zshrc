@@ -12,7 +12,21 @@ fi
 
 # Customize to your needs...
 
+#Path
+PATH="$PATH:/Library/TeX/texbin/"
+
 #aliases
 alias set-szar-env='source $HOME/Development/tsz_18/szar/szar-env/bin/activate'
 
 alias jnb='jupyter notebook'
+
+alias resource='source $HOME/.zshrc'
+
+alias python='python3'
+
+alias src='source'
+
+#other variables
+#
+export VISUAL=vim
+export EDITOR="$VISUAL"
