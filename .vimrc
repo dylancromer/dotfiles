@@ -12,20 +12,40 @@ Plug 'rafi/awesome-vim-colorschemes'
 Plug 'fidian/hexmode'
 Plug 'Shougo/vinarise.vim'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
 Plug 'metakirby5/codi.vim'
 Plug 'tpope/vim-abolish'
 Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/command-t'
+Plug 'sheerun/vim-polyglot'
+Plug 'flazz/vim-colorschemes'
 call plug#end()
 
 set ruler
 let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_enable_on_vim_startup = 1
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Color"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 colorscheme atom
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SPLIT PANES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+map - :split<cr>
+map <Bar> :vsplit<cr>
+
+set splitbelow
+set splitright
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "SPELL"
