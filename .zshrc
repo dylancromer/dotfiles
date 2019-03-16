@@ -1,1 +1,0 @@
-/home/davis/.zshrc##Linux
