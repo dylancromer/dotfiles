@@ -1,0 +1,42 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+# Customize to your needs...
+
+autoload -Uz promptinit
+promptinit
+prompt nicoulaj
+
+alias ipget="$HOME/Development/phone_home/ip_tools.py"
+alias dirsearch="$HOME/Development/dirsearch/dirsearch.py"
+alias open="xdg-open"
+alias jnb ="jupyter notebook"
+alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
+alias src="source"
+alias resrc="source $HOME/.zshrc"
+
+export PATH="$HOME/.local/bin:$PATH"
+export GOPATH="$HOME/Development/go"
+export GOBIN="$GOPATH/bin"
+export PATH="$PATH:$GOPATH/bin"
+
+export mullvad0=/etc/wireguard/mullvad0.conf
+
+export FZF_DEFAULT_COMMAND='fd --type f'
+
+export BROWSER='/usr/bin/firefox-developer-edition'
+
+eval $(thefuck --alias)
+
+if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
+        source /etc/profile.d/vte.sh
+fi

@@ -1,0 +1,41 @@
+#
+# Executes commands at the start of an interactive session.
+#
+# Authors:
+#   Sorin Ionescu <sorin.ionescu@gmail.com>
+#
+
+# Source Prezto.
+if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
+  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
+fi
+
+autoload -Uz promptinit
+promptinit
+prompt nicoulaj
+
+# Customize to your needs...
+
+#Path
+PATH="/usr/local/opt/ruby/bin:$PATH"
+PATH="$PATH:/Library/TeX/texbin/"
+
+#aliases
+alias set-szar-env='source $HOME/Development/tsz_18/szar/szar-env/bin/activate'
+
+alias jnb='jupyter notebook'
+
+alias resource='source $HOME/.zshrc'
+
+alias python='python3'
+
+alias pip='pip3'
+
+alias src='source'
+
+alias resrc='source $HOME/.zshrc'
+
+#other variables
+#
+export VISUAL=vim
+export EDITOR="$VISUAL"
