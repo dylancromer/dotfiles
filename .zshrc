@@ -13,6 +13,7 @@ fi
 # Customize to your needs...
 
 #Path
+PATH="/usr/local/opt/ruby/bin:$PATH"
 PATH="$PATH:/Library/TeX/texbin/"
 
 #aliases
@@ -24,7 +25,11 @@ alias resource='source $HOME/.zshrc'
 
 alias python='python3'
 
+alias pip='pip3'
+
 alias src='source'
+
+alias resrc='source $HOME/.zshrc'
 
 #other variables
 #
