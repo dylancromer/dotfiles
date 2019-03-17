@@ -16,24 +16,22 @@ autoload -Uz promptinit
 promptinit
 prompt nicoulaj
 
-alias ipget="$HOME/Development/phone_home/ip_tools.py"
-alias dirsearch="$HOME/Development/dirsearch/dirsearch.py"
-alias open="xdg-open"
-alias jnb ="jupyter notebook"
-alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
-alias src="source"
-alias resrc="source $HOME/.zshrc"
-
 export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/Development/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOPATH/bin"
 
 export mullvad0=/etc/wireguard/mullvad0.conf
-
 export FZF_DEFAULT_COMMAND='fd --type f'
-
 export BROWSER='/usr/bin/firefox-developer-edition'
+
+alias ipget="$HOME/Development/phone_home/ip_tools.py"
+alias dirsearch="$HOME/Development/dirsearch/dirsearch.py"
+alias open="xdg-open"
+alias jnb="jupyter notebook"
+alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
+alias src="source"
+alias resrc="source $HOME/.zshrc"
 
 eval $(thefuck --alias)
 
