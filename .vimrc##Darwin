@@ -130,6 +130,7 @@ inoremap <c-c> <esc>
 
 "Adds a newline without going into insert mode
 nnoremap oo o<Esc>k
+nnoremap OO O<Esc>j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Custom Autocmds"
