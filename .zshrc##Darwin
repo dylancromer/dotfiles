@@ -18,6 +18,7 @@ prompt nicoulaj
 
 #Path
 PATH="/usr/local/opt/ruby/bin:$PATH"
+PATH="$PATH:$HOME/Library/Python/3.7/bin/"
 PATH="$PATH:/Library/TeX/texbin/"
 
 #aliases
