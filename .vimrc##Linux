@@ -131,6 +131,15 @@ augroup vimrcEx
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"MISC"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>c :nohlsearch<cr>
+
+"I think this remaps exiting insert mode to c-c
+inoremap <c-c> <esc>
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
