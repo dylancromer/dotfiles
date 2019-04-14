@@ -32,6 +32,7 @@ alias jnb="jupyter notebook"
 alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
 alias src="source"
 alias resrc="source $HOME/.zshrc"
+alias lv="lr -I *venv*"
 
 eval $(thefuck --alias)
 
