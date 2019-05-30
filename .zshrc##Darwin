@@ -35,6 +35,8 @@ alias resource='source $HOME/.zshrc'
 
 alias python='python3'
 
+alias pypy='pypy3'
+
 alias pip='pip3'
 
 alias src='source'
