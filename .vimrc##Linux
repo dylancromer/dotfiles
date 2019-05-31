@@ -15,6 +15,7 @@ Plug 'terryma/vim-expand-region'
 Plug 'wincent/command-t'
 Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
+Plug 'anntzer/vim-cython'
 call plug#end()
 
 let g:vimtex_compiler_latexmk = {'callback' : 0}
