@@ -21,6 +21,7 @@ PATH="/usr/local/opt/ruby/bin:$PATH"
 PATH="$PATH:$HOME/Library/Python/3.7/bin/"
 PATH="$PATH:/Library/TeX/texbin/"
 PATH="$PATH:/Users/dylan/go/bin/"
+PATH="$PATH:/Users/dylan/.cargo/bin"
 
 #aliases
 alias szar='source $HOME/Development/tsz_18/szar/szar-env/bin/activate'
