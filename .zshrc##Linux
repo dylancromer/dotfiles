@@ -21,6 +21,9 @@ export GOPATH="$HOME/Development/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOPATH/bin"
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 export mullvad0=/etc/wireguard/mullvad0.conf
 export FZF_DEFAULT_COMMAND='fd --type f'
 export BROWSER='/usr/bin/firefox-developer-edition'
