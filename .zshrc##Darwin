@@ -46,6 +46,10 @@ alias lv="lr -I *venv*"
 
 alias resrc='source $HOME/.zshrc'
 
+alias randomart='$HOME/Development/github/justuswilhelm/hashprint/randomart.py'
+
+alias novemberhill='ssh -L 8889:localhost:8889 davis@lutuci.novemberhill.dev -p 2022'
+
 #other variables
 #
 export VISUAL=vim
