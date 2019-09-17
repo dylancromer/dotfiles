@@ -1,1 +1,1 @@
-/Users/dylan/.vimrc##Darwin
+/home/davis/.vimrc##Linux
