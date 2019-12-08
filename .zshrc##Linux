@@ -22,6 +22,9 @@ export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOPATH/bin"
 export PATH="$PATH:/home/davis/Development/github/blechschmidt/massdns/bin"
 
+export VISUAL=vim
+export EDITOR="$VISUAL"
+
 export mullvad0=/etc/wireguard/mullvad0.conf
 export FZF_DEFAULT_COMMAND='fd --type f'
 export BROWSER='/usr/bin/firefox-developer-edition'
@@ -30,7 +33,9 @@ alias ipget="$HOME/Development/phone_home/ip_tools.py"
 alias dirsearch="$HOME/Development/dirsearch/dirsearch.py"
 alias open="xdg-open"
 alias jnb="jupyter notebook"
-alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
+alias rjnb="nohup jupyter notebook --no-browser --port=8889 &"
+alias kill-rjnb="killall jupyter-noteboo && rm -f nohup.out"
+alias maszcal="source $HOME/Development/github/dylancromer/maszcal/venv-maszcal/bin/activate"
 alias src="source"
 alias resrc="source $HOME/.zshrc"
 alias lv="lr -I *venv*"

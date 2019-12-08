@@ -8,13 +8,12 @@ Plug 'fidian/hexmode'
 Plug 'Shougo/vinarise.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-Plug 'metakirby5/codi.vim'
 Plug 'tpope/vim-abolish'
-Plug 'junegunn/goyo.vim'
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/command-t'
 Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
+Plug 'jnwhiteh/vim-golang'
 Plug 'anntzer/vim-cython'
 call plug#end()
 
@@ -130,8 +129,8 @@ nnoremap <leader>c :nohlsearch<cr>
 inoremap <c-c> <esc>
 
 "Adds a newline without going into insert mode
-nnoremap oo o<Esc>k
-nnoremap OO O<Esc>j
+"nnoremap oo o<Esc>k
+"nnoremap OO O<Esc>j
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Custom Autocmds"
