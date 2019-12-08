@@ -20,6 +20,7 @@ export PATH="$HOME/.local/bin:$PATH"
 export GOPATH="$HOME/Development/go"
 export GOBIN="$GOPATH/bin"
 export PATH="$PATH:$GOPATH/bin"
+export PATH="$PATH:/home/davis/Development/github/blechschmidt/massdns/bin"
 
 export mullvad0=/etc/wireguard/mullvad0.conf
 export FZF_DEFAULT_COMMAND='fd --type f'
@@ -33,6 +34,9 @@ alias set-szar-env="source $HOME/Development/tsz_18/szar/szar-env/bin/activate"
 alias src="source"
 alias resrc="source $HOME/.zshrc"
 alias lv="lr -I *venv*"
+
+alias maszcal="source $HOME/Development/maszcal/venv-maszcal/bin/activate"
+alias osint="source $HOME/Investigations/venvs/venv-general-osint/bin/activate"
 
 eval $(thefuck --alias)
 
