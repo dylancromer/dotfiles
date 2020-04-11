@@ -5,6 +5,8 @@
 #   Sorin Ionescu <sorin.ionescu@gmail.com>
 #
 
+unset HISTFILE
+
 # Source Prezto.
 if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
   source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
@@ -48,3 +50,5 @@ eval $(thefuck --alias)
 if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
         source /etc/profile.d/vte.sh
 fi
+
+unset HISTFILE
