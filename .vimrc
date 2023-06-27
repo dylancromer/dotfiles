@@ -1,6 +1,9 @@
+"Allow compat between vimtex and polyglot
+let g:polyglot_disabled = ['latex']
+
 call plug#begin()
 Plug 'lervag/vimtex'
-Plug 'JuliaEditorSupport/julia-vim'
+Plug 'sheerun/vim-polyglot'
 Plug 'cespare/vim-toml'
 Plug 'rust-lang/rust.vim'
 Plug 'rafi/awesome-vim-colorschemes'
@@ -8,21 +11,23 @@ Plug 'fidian/hexmode'
 Plug 'Shougo/vinarise.vim'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-commentary'
-Plug 'metakirby5/codi.vim'
 Plug 'tpope/vim-abolish'
-Plug 'junegunn/goyo.vim'
+Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-expand-region'
 Plug 'wincent/command-t'
-Plug 'sheerun/vim-polyglot'
 Plug 'flazz/vim-colorschemes'
-Plug 'anntzer/vim-cython'
+Plug 'jnwhiteh/vim-golang'
+Plug 'dylancromer/vim-cython'
+Plug 'junegunn/goyo.vim'
 call plug#end()
+
+let g:CommandTPreferredImplementation='ruby'
 
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 3
 let g:indent_guides_enable_on_vim_startup = 1
-let g:polyglot_disabled = ['latex']
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Color"
@@ -30,6 +35,19 @@ let g:polyglot_disabled = ['latex']
 :color grb256
 :set t_Co=256 " 256 colors
 :set background=dark
+
+" nnoremap <Up> <NOP>
+" nnoremap <Down> <NOP>
+" nnoremap <Left> <NOP>
+" nnoremap <Right> <NOP>
+" inoremap <Up> <NOP>
+" inoremap <Down> <NOP>
+" inoremap <Left> <NOP>
+" inoremap <Right> <NOP>
+" vnoremap <Up> <NOP>
+" vnoremap <Down> <NOP>
+" vnoremap <Left> <NOP>
+" vnoremap <Right> <NOP>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -119,6 +137,21 @@ set spell spelllang=en_us
 set spell!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"MISC"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+nnoremap <leader>c :nohlsearch<cr>
+
+"I think this remaps exiting insert mode to c-c
+inoremap <c-c> <esc>
+
+"Adds a newline without going into insert mode
+"nnoremap oo o<Esc>k
+"nnoremap OO O<Esc>j
+
+command! -nargs=0 PopStack 0d|norm ''
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "Custom Autocmds"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrcEx
@@ -131,15 +164,6 @@ augroup vimrcEx
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"MISC"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-nnoremap <leader>c :nohlsearch<cr>
-
-"I think this remaps exiting insert mode to c-c
-inoremap <c-c> <esc>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
@@ -169,3 +193,13 @@ function! RenameFile()
     endif
 endfunction
 map <leader>n :call RenameFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BIND tt TO MY TEST COMMANDS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! SetTestKeys(...)
+    let test_commands = join(a:000)
+    let binding = ':w\|:!' . test_commands . '<cr>'
+    exec ':nnoremap tt ' . binding
+endfunction
+command! -nargs=+ SetTT call SetTestKeys(<f-args>)                                     

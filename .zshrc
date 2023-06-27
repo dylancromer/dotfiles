@@ -20,40 +20,21 @@ prompt nicoulaj
 PATH="/usr/local/opt/ruby/bin:$PATH"
 PATH="$PATH:$HOME/Library/Python/3.7/bin/"
 PATH="$PATH:/Library/TeX/texbin/"
-PATH="$PATH:/Users/dylan/go/bin/"
-PATH="$PATH:/Users/dylan/.cargo/bin"
+PATH="$PATH:$HOME/.local/bin/"
+PATH="$PATH:$HOME/.cargo/bin"
 
 #aliases
-alias szar='source $HOME/Development/tsz_18/szar/szar-env/bin/activate'
-
-alias maszcal='source $HOME/Development/tsz_18/masscal/venv-masscal/bin/activate'
-
-alias maszcal-pypy='source $HOME/Development/tsz_18/masscal/venv-masscal-pypy/bin/activate'
-
 alias jnb='jupyter notebook'
-
-alias resource='source $HOME/.zshrc'
-
 alias python='python3'
-
 alias pypy='pypy3'
-
 alias pip='pip3'
-
 alias src='source'
-
-alias lv="lr -I *venv*"
-
 alias resrc='source $HOME/.zshrc'
-
 alias randomart='$HOME/Development/github/justuswilhelm/hashprint/randomart.py'
-
-alias novemberhill='ssh -L 8889:localhost:8889 davis@lutuci.novemberhill.dev -p 2022'
+alias clear='echo "Nope"'
+alias mypy='mypy --strict --pretty'
 
 #other variables
 #
 export VISUAL=vim
 export EDITOR="$VISUAL"
-export dmcgh="https://github.com/dylancromer"
-
-eval $(thefuck --alias)
