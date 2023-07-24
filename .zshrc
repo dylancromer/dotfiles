@@ -24,7 +24,7 @@ PATH="$PATH:$HOME/.local/bin/"
 PATH="$PATH:$HOME/.cargo/bin"
 
 #aliases
-alias jnb='jupyter notebook'
+alias jnb='jupyter lab'
 alias python='python3'
 alias pypy='pypy3'
 alias pip='pip3'
@@ -33,8 +33,12 @@ alias resrc='source $HOME/.zshrc'
 alias randomart='$HOME/Development/github/justuswilhelm/hashprint/randomart.py'
 alias clear='echo "Nope"'
 alias mypy='mypy --strict --pretty'
+alias vi=nvim
+alias wezterm=/Applications/WezTerm.app/Contents/MacOS/wezterm
 
 #other variables
 #
 export VISUAL=vim
 export EDITOR="$VISUAL"
+
+export HOMEBREW_NO_ANALYTICS=1

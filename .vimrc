@@ -18,36 +18,67 @@ Plug 'wincent/command-t'
 Plug 'flazz/vim-colorschemes'
 Plug 'jnwhiteh/vim-golang'
 Plug 'dylancromer/vim-cython'
-Plug 'junegunn/goyo.vim'
+Plug 'dense-analysis/ale'
+Plug 'puremourning/vimspector'
+Plug 'sagi-z/vimspectorpy'
+Plug 'bogado/file-line'
+Plug 'ntpeters/vim-better-whitespace'
+Plug 'voldikss/vim-floaterm'
+Plug 'dylancromer/2049.vim'
+if has('nvim')
+    Plug 'NvChad/nvim-colorizer.lua'
+endif
 call plug#end()
 
-let g:CommandTPreferredImplementation='ruby'
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" COLOR
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set termguicolors
+color 2049-ylcy
+let g:better_whitespace_guicolor='#eb4e6e'
 
+"""
+" PLUGIN CONFIG
+"""
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 3
 let g:indent_guides_enable_on_vim_startup = 1
 
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 0
+let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_text_changed = 0
+let g:ale_lint_on_filetype_changed = 0
+let g:ale_set_signs = 1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Color"
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:color grb256
-:set t_Co=256 " 256 colors
-:set background=dark
+" Stops polyglot from screwing up trailing whitespace highlighting in Neovim
+" Use vim-better-whitespace instead
+let g:python_highlight_space_errors = 0
 
-" nnoremap <Up> <NOP>
-" nnoremap <Down> <NOP>
-" nnoremap <Left> <NOP>
-" nnoremap <Right> <NOP>
-" inoremap <Up> <NOP>
-" inoremap <Down> <NOP>
-" inoremap <Left> <NOP>
-" inoremap <Right> <NOP>
-" vnoremap <Up> <NOP>
-" vnoremap <Down> <NOP>
-" vnoremap <Left> <NOP>
-" vnoremap <Right> <NOP>
+"""
+" NEOVIM SPECIFIC CONFIG
+"""
+if has('nvim')
+    lua require('wincent.commandt').setup()
+    let g:python3_host_prog = '/Users/crowlake/.local/venv/nvim/bin/python3'
+else
+    let g:CommandTPreferredImplementation='ruby'
+endif
+
+lua <<EOF
+require'colorizer'.setup {
+    filetypes = {
+        "vim";
+        "lua";
+    },
+    user_default_options = {
+        mode = "background";
+        names = false;
+        hsl_fn = true;
+    },
+}
+EOF
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
@@ -114,6 +145,8 @@ set autoread
 set re=1
 " Stop SQL language files from doing unholy things to the C-c key
 let g:omni_sql_no_default_maps = 1
+" Make yanking yank to clipboard
+set clipboard+=unnamedplus
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,17 +164,39 @@ set splitbelow
 set splitright
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"SPELL"
+" SPELL
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set spell spelllang=en_us
 set spell!
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"MISC"
+" COMMAND-T
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+    :lua vim.keymap.set('n', '<Leader>b', '<Plug>(CommandTBuffer)')
+    :lua vim.keymap.set('n', '<Leader>j', '<Plug>(CommandTJump)')
+    :lua vim.keymap.set('n', '<Leader>t', '<Plug>(CommandT)')
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BANG REPLACEMENT FOR NEOVIM
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+    :lua vim.keymap.set('n', '!', 'FloatermNew! --width=0.000 --height=0.999')
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" MISC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-nnoremap <leader>c :nohlsearch<cr>
-
+" Remove search highlight
+nnoremap <silent> <leader>c :nohlsearch<cr>
+" Toggle ALE highlighting
+nnoremap <silent> <enter> :ALEToggle<cr>
+" Toggle line numbers
+nnoremap <silent> <leader>l :windo set invnumber<cr>
+" Toggle line numbers just for current buffer
+nnoremap <silent> <leader>; :set invnumber<cr>
 "I think this remaps exiting insert mode to c-c
 inoremap <c-c> <esc>
 
@@ -152,7 +207,16 @@ inoremap <c-c> <esc>
 command! -nargs=0 PopStack 0d|norm ''
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"Custom Autocmds"
+" NEOVIM MISC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+    nnoremap <silent> <c-x> :FloatermToggle<cr>
+    tnoremap <silent> <c-x> <C-\><C-n>:FloatermToggle<cr>
+    tnoremap <silent> <c-q> <C-\><C-n>:FloatermKill<cr>
+endif
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 augroup vimrcEx
 	autocmd BufReadPost *
@@ -202,4 +266,4 @@ function! SetTestKeys(...)
     let binding = ':w\|:!' . test_commands . '<cr>'
     exec ':nnoremap tt ' . binding
 endfunction
-command! -nargs=+ SetTT call SetTestKeys(<f-args>)                                     
+command! -nargs=+ SetTT call SetTestKeys(<f-args>)
