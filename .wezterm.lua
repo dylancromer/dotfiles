@@ -103,5 +103,7 @@ config.colors = {
 
 config.hide_tab_bar_if_only_one_tab = true;
 
+config.audible_bell = "Disabled"
+
 -- and finally, return the configuration to wezterm
 return config
