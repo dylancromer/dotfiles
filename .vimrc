@@ -145,9 +145,11 @@ set autoread
 set re=1
 " Stop SQL language files from doing unholy things to the C-c key
 let g:omni_sql_no_default_maps = 1
-" Make yanking yank to clipboard
-set clipboard+=unnamedplus
 
+nnoremap <leader>y :y+
+nnoremap <leader>yy :yy+
+nnoremap <leader>p :p+
+nnoremap <leader>pp :pp+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SPLIT PANES

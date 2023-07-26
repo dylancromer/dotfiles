@@ -10,18 +10,31 @@ if wezterm.config_builder then
   config = wezterm.config_builder()
 end
 
--- This is where you actually apply your config choices
+---------------------------------------------- KEYMAPS ---------------------------------------------
+config.keys = {
+  {
+    key = '\\',
+    mods = 'CTRL',
+    action = wezterm.action.SplitHorizontal { domain = 'CurrentPaneDomain' },
+  },
+  {
+    key = '0',
+    mods = 'CTRL',
+    action = wezterm.action.SplitVertical { domain = 'CurrentPaneDomain' },
+  },
+}
 
--- For example, changing the color scheme:
-config.color_scheme = 'Solarized Dark Higher Contrast (Gogh)'
-
+-------------------------------------------- TEXT CONFIG -------------------------------------------
 config.font_size = 14.5
 
 config.font =
-    --wezterm.font("InputCdm Mono", {weight="Regular"})
-    --wezterm.font("Hack")
-    --wezterm.font("mononoki")
-    wezterm.font("Noto Sans Mono")
+    wezterm.font('Input', {weight='Regular'})
+    --wezterm.font('Hack')
+    --wezterm.font('mononoki')
+    --wezterm.font('Noto Sans Mono')
+
+---------------------------------------- CUSTOM COLORSCHEME ----------------------------------------
+config.color_scheme = 'Solarized Dark Higher Contrast (Gogh)'
 
 config.colors = {
   -- The default text color
@@ -33,41 +46,41 @@ config.colors = {
   -- cursor and the cursor style is set to Block
   --cursor_bg = '',
   -- Overrides the text color when the current cell is occupied by the cursor
-  --cursor_fg = 'black',
+  cursor_fg = '#05181c',
   -- Specifies the border color of the cursor when the cursor style is set to Block,
   -- or the color of the vertical or horizontal bar when the cursor style is set to
   -- Bar or Underline.
-  --cursor_border = '#52ad70',
+  cursor_border = '#c4e1df',
 
   -- the foreground color of selected text
   selection_fg = '#eee8d5',
   -- the background color of selected text
   selection_bg = '#032931',
 
-  -- The color of the scrollbar "thumb"; the portion that represents the current viewport
+  -- The color of the scrollbar 'thumb'; the portion that represents the current viewport
   scrollbar_thumb = '#222222',
 
   -- The color of the split lines between panes
   split = '#013640',
 
   ansi = {
-    '#03274f';
-    '#d74d50';
-    '#36bdbc';
-    '#879aa1';
-    '#d4b869';
-    '#cb663c';
+    '#002b36';
     '#e5634f';
+    '#36bdbc';
+    '#d4b869';
+    '#60b0d6';
+    '#829ce5';
+    '#6ce2e2';
     '#eee8d5';
   },
   brights = {
-    '#002b36';
-    '#39a4de';
-    '#586e75';
-    '#d9813d';
     '#839496';
+    '#d74d50';
     '#45be9b';
-    '#60b0d6';
+    '#d9813d';
+    '#39a4de';
+    '#e080db';
+    '#6ce2e2';
     '#fdf6e3';
   },
 
@@ -87,9 +100,9 @@ config.colors = {
   -- 2. selection_* otherwise
   copy_mode_active_highlight_bg = { Color = '#000000' },
   -- use `AnsiColor` to specify one of the ansi color palette values
-  -- (index 0-15) using one of the names "Black", "Maroon", "Green",
-  --  "Olive", "Navy", "Purple", "Teal", "Silver", "Grey", "Red", "Lime",
-  -- "Yellow", "Blue", "Fuchsia", "Aqua" or "White".
+  -- (index 0-15) using one of the names 'Black', 'Maroon', 'Green',
+  --  'Olive', 'Navy', 'Purple', 'Teal', 'Silver', 'Grey', 'Red', 'Lime',
+  -- 'Yellow', 'Blue', 'Fuchsia', 'Aqua' or 'White'.
   copy_mode_active_highlight_fg = { AnsiColor = 'Black' },
   copy_mode_inactive_highlight_bg = { Color = '#52ad70' },
   copy_mode_inactive_highlight_fg = { AnsiColor = 'White' },
@@ -101,9 +114,13 @@ config.colors = {
 
 }
 
+------------------------------------ MISCELLANEOUS CUSTOMIZATION -------------------------------------
 config.hide_tab_bar_if_only_one_tab = true;
-
-config.audible_bell = "Disabled"
+config.audible_bell = 'Disabled'
+config.window_decorations = 'RESIZE'
+config.alternate_buffer_wheel_scroll_speed = 3
+config.default_cursor_style = 'SteadyUnderline'
+config.cursor_thickness = '200%'
 
 -- and finally, return the configuration to wezterm
 return config
