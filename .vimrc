@@ -37,19 +37,19 @@ set termguicolors
 color 2049-ylcy
 let g:better_whitespace_guicolor='#eb4e6e'
 
-"""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN CONFIG
-"""
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:vimtex_compiler_latexmk = {'callback' : 0}
 let g:indent_guides_guide_size = 1
 let g:indent_guides_color_change_percent = 3
 let g:indent_guides_enable_on_vim_startup = 1
 
 let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 0
-let g:ale_lint_on_insert_leave = 0
-let g:ale_lint_on_text_changed = 0
-let g:ale_lint_on_filetype_changed = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_filetype_changed = 1
 let g:ale_set_signs = 1
 
 " Stops polyglot from screwing up trailing whitespace highlighting in Neovim
@@ -146,10 +146,15 @@ set re=1
 " Stop SQL language files from doing unholy things to the C-c key
 let g:omni_sql_no_default_maps = 1
 
-nnoremap <leader>y :y+
-nnoremap <leader>yy :yy+
-nnoremap <leader>p :p+
-nnoremap <leader>pp :pp+
+vnoremap <leader>y "+y
+nnoremap <leader>y "+y
+nnoremap <leader>yy "+yy
+nnoremap <leader>Y "+yg
+
+vnoremap <leader>p "+p
+nnoremap <leader>p "+p
+vnoremap <leader>P "+p
+nnoremap <leader>P "+p
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SPLIT PANES
