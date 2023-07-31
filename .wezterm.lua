@@ -25,62 +25,63 @@ config.keys = {
 }
 
 -------------------------------------------- TEXT CONFIG -------------------------------------------
-config.font_size = 14.5
+config.font_size = 15
 
 config.font =
-    wezterm.font('Input', {weight='Regular'})
-    --wezterm.font('Hack')
-    --wezterm.font('mononoki')
-    --wezterm.font('Noto Sans Mono')
+    --wezterm.font('Input', { weight = 'Regular' })
+    --wezterm.font('Hack', { weight = 'Regular' })
+    --wezterm.font('mononoki', { weight = 'Regular' })
+    --wezterm.font('Noto Sans Mono', { weight = 'Regular' })
+    wezterm.font('Source Code Pro', { weight = 'Regular' })
 
 ---------------------------------------- CUSTOM COLORSCHEME ----------------------------------------
 config.color_scheme = 'Solarized Dark Higher Contrast (Gogh)'
 
 config.colors = {
   -- The default text color
-  foreground = '#c4e1df',
+  foreground = '#dedfd8',
   -- The default background color
-  background = '#05181c',
+  background = '#0e141a',
 
   -- Overrides the cell background color when the current cell is occupied by the
   -- cursor and the cursor style is set to Block
   --cursor_bg = '',
   -- Overrides the text color when the current cell is occupied by the cursor
-  cursor_fg = '#05181c',
+  cursor_fg = '#0e141a',
   -- Specifies the border color of the cursor when the cursor style is set to Block,
   -- or the color of the vertical or horizontal bar when the cursor style is set to
   -- Bar or Underline.
-  cursor_border = '#c4e1df',
+  cursor_border = '#dedfd8',
 
   -- the foreground color of selected text
   selection_fg = '#eee8d5',
   -- the background color of selected text
-  selection_bg = '#032931',
+  selection_bg = '#33415E',
 
   -- The color of the scrollbar 'thumb'; the portion that represents the current viewport
   scrollbar_thumb = '#222222',
 
   -- The color of the split lines between panes
-  split = '#013640',
+  split = '#232834',
 
   ansi = {
-    '#002b36';
-    '#e5634f';
-    '#36bdbc';
-    '#d4b869';
-    '#60b0d6';
-    '#829ce5';
-    '#6ce2e2';
+    '#191E2A';
+    '#F07178';
+    '#95E6CB';
+    '#FFD580';
+    '#73D0FF';
+    '#D4BFFF';
+    '#5CCFE6';
     '#eee8d5';
   },
   brights = {
-    '#839496';
-    '#d74d50';
-    '#45be9b';
-    '#d9813d';
-    '#39a4de';
-    '#e080db';
-    '#6ce2e2';
+    '#404755';
+    '#F28779';
+    '#BAE67E';
+    '#FFB454';
+    '#59C2FF';
+    '#CB9FF8';
+    '#39BAE6';
     '#fdf6e3';
   },
 

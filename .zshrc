@@ -31,14 +31,14 @@ alias pip='pip3'
 alias src='source'
 alias resrc='source $HOME/.zshrc'
 alias randomart='$HOME/Development/github/justuswilhelm/hashprint/randomart.py'
-alias clear='echo "Nope"'
 alias mypy='mypy --strict --pretty'
 alias vi=nvim
 alias wezterm=/Applications/WezTerm.app/Contents/MacOS/wezterm
 
 #other variables
 #
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR="$VISUAL"
 
 export HOMEBREW_NO_ANALYTICS=1
+export PYTHONBREAKPOINT=ipdb.set_trace
