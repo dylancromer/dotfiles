@@ -21,7 +21,6 @@ Plug 'puremourning/vimspector'
 Plug 'sagi-z/vimspectorpy'
 Plug 'bogado/file-line'
 Plug 'ntpeters/vim-better-whitespace'
-Plug 'voldikss/vim-floaterm'
 Plug 'dylancromer/2049.vim'
 Plug 'folke/tokyonight.nvim'
 Plug 'embark-theme/vim', { 'as': 'embark', 'branch': 'main' }
@@ -29,6 +28,7 @@ Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 Plug 'dylancromer/neovim-ayu'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'maxmx03/fluoromachine.nvim'
+Plug 'numToStr/FTerm.nvim'
 if has('nvim')
     Plug 'NvChad/nvim-colorizer.lua'
 endif
@@ -345,11 +345,46 @@ command! -nargs=0 PopStack 0d|norm ''
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " NEOVIM MISC
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('nvim')
-    nnoremap <silent> <c-x> :FloatermToggle<cr>
-    tnoremap <silent> <c-x> <C-\><C-n>:FloatermToggle<cr>
-    tnoremap <silent> <c-q> <C-\><C-n>:FloatermKill<cr>
-endif
+lua <<EOF
+require'FTerm'.setup({
+    ---Neovim's native window border. See `:h nvim_open_win` for more configuration options.
+    border = 'single',
+
+    auto_close = false,
+
+    ---Highlight group for the terminal. See `:h winhl`
+    ---@type string
+    hl = 'Normal',
+
+    ---Transparency of the floating window. See `:h winblend`
+    ---@type integer
+    blend = 0,
+
+    ---Object containing the terminal window dimensions.
+    ---The value for each field should be between `0` and `1`
+    ---@type table<string,number>
+    dimensions = {
+        height = 1.03, -- Height of the terminal window
+        width = 1,03, -- Width of the terminal window
+        x = 0.5, -- X axis of the terminal window
+        y = 0.5, -- Y axis of the terminal window
+    },
+
+    ---Replace instead of extend the current environment with `env`.
+    ---See `:h jobstart-options`
+    ---@type boolean
+    clear_env = false,
+})
+
+vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
+vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = true })
+vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
+vim.api.nvim_create_user_command('FTermToggle', require('FTerm').toggle, { bang = true })
+EOF
+
+nnoremap <silent> <c-x> :FTermToggle<cr>
+tnoremap <silent> <c-x> <C-\><C-n>:FTermToggle<cr>
+tnoremap <silent> <c-q> <C-\><C-n>:FTermExit<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
