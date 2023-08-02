@@ -17,8 +17,8 @@ Plug 'wincent/command-t'
 Plug 'jnwhiteh/vim-golang'
 Plug 'dylancromer/vim-cython'
 Plug 'dense-analysis/ale'
-Plug 'puremourning/vimspector'
-Plug 'sagi-z/vimspectorpy'
+"Plug 'puremourning/vimspector'
+"Plug 'sagi-z/vimspectorpy'
 Plug 'bogado/file-line'
 Plug 'ntpeters/vim-better-whitespace'
 Plug 'dylancromer/2049.vim'
@@ -364,8 +364,8 @@ require'FTerm'.setup({
     ---The value for each field should be between `0` and `1`
     ---@type table<string,number>
     dimensions = {
-        height = 1.03, -- Height of the terminal window
-        width = 1,03, -- Width of the terminal window
+        height = 1.01, -- Height of the terminal window
+        width = 1, -- Width of the terminal window
         x = 0.5, -- X axis of the terminal window
         y = 0.5, -- Y axis of the terminal window
     },
@@ -376,6 +376,12 @@ require'FTerm'.setup({
     clear_env = false,
 })
 
+function run_fterm_command (options)
+    local command_args = options.args
+    require('FTerm').run(command_args)
+end
+
+vim.api.nvim_create_user_command('FTermRun', run_fterm_command, { bang = true, complete='file_in_path', nargs='+' })
 vim.api.nvim_create_user_command('FTermOpen', require('FTerm').open, { bang = true })
 vim.api.nvim_create_user_command('FTermClose', require('FTerm').close, { bang = true })
 vim.api.nvim_create_user_command('FTermExit', require('FTerm').exit, { bang = true })
@@ -434,15 +440,15 @@ map <leader>n :call RenameFile()<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! SetTTBinding(...)
     let test_commands = join(a:000)
-    let binding = ':w\|:FloatermNew! --width=0.999 --height=0.999 clear && ' . test_commands . ' <cr>'
+    let binding = ':w\|:FTermRun clear && ' . test_commands . ' <cr>'
     exec ':nnoremap tt ' . binding
 endfunction
-command! -nargs=+ BindTT call SetTTBinding(<f-args>)
+command! -nargs=+ -complete=file_in_path BindTT call SetTTBinding(<f-args>)
 
 function! SetTestKeys(...)
     let current_file = expand('%:p')
     let test_commands = join(a:000)
-    let binding = ':w\|:FloatermNew! --width=0.999 --height=0.999 clear && ' . test_commands . ' ' . current_file . ' <cr>'
+    let binding = ':w\|:FTermRun clear && ' . test_commands . ' ' . current_file . ' <cr>'
     exec ':nnoremap tt ' . binding
 endfunction
-command! -nargs=+ SetTest call SetTestKeys(<f-args>)
+command! -nargs=+ -complete=file_in_path SetTest call SetTestKeys(<f-args>)

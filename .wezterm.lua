@@ -35,7 +35,7 @@ config.font =
     wezterm.font('Source Code Pro', { weight = 'Regular' })
 
 ---------------------------------------- CUSTOM COLORSCHEME ----------------------------------------
-config.color_scheme = 'Solarized Dark Higher Contrast (Gogh)'
+config.color_scheme = 'Ayu Dark (Gogh)'
 
 config.colors = {
   -- The default text color
@@ -45,7 +45,7 @@ config.colors = {
 
   -- Overrides the cell background color when the current cell is occupied by the
   -- cursor and the cursor style is set to Block
-  --cursor_bg = '',
+  cursor_bg = '#dedfd8',
   -- Overrides the text color when the current cell is occupied by the cursor
   cursor_fg = '#0e141a',
   -- Specifies the border color of the cursor when the cursor style is set to Block,
