@@ -13,7 +13,6 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'terryma/vim-expand-region'
-Plug 'wincent/command-t'
 Plug 'jnwhiteh/vim-golang'
 Plug 'dylancromer/vim-cython'
 Plug 'dense-analysis/ale'
@@ -29,6 +28,9 @@ Plug 'dylancromer/neovim-ayu'
 Plug 'EdenEast/nightfox.nvim'
 Plug 'maxmx03/fluoromachine.nvim'
 Plug 'numToStr/FTerm.nvim'
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'branch': '0.1.x' }
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build' }
 if has('nvim')
     Plug 'NvChad/nvim-colorizer.lua'
 endif
@@ -169,51 +171,6 @@ require'nvim-treesitter.configs'.setup {
 EOF
 
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGIN CONFIG
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:vimtex_compiler_latexmk = {'callback' : 0}
-let g:indent_guides_guide_size = 1
-let g:indent_guides_color_change_percent = 3
-let g:indent_guides_enable_on_vim_startup = 1
-
-let g:ale_lint_on_enter = 0
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_text_changed = 1
-let g:ale_lint_on_filetype_changed = 1
-let g:ale_set_signs = 1
-
-" Stops polyglot from screwing up trailing whitespace highlighting in Neovim
-" Use vim-better-whitespace instead
-let g:python_highlight_space_errors = 0
-
-"""
-" NEOVIM SPECIFIC CONFIG
-"""
-if has('nvim')
-    lua require('wincent.commandt').setup()
-    let g:python3_host_prog = '/Users/crowlake/.local/venv/nvim/bin/python3'
-else
-    let g:CommandTPreferredImplementation='ruby'
-endif
-
-lua <<EOF
-require'colorizer'.setup {
-    filetypes = {
-        "vim";
-        "lua";
-        "toml";
-    },
-    user_default_options = {
-        mode = "background";
-        names = false;
-        hsl_fn = true;
-    },
-}
-EOF
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -290,6 +247,52 @@ nnoremap <leader>p "+p
 vnoremap <leader>P "+p
 nnoremap <leader>P "+p
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGIN CONFIG
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:vimtex_compiler_latexmk = {'callback' : 0}
+let g:indent_guides_guide_size = 1
+let g:indent_guides_color_change_percent = 3
+let g:indent_guides_enable_on_vim_startup = 1
+
+let g:ale_lint_on_enter = 0
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_text_changed = 1
+let g:ale_lint_on_filetype_changed = 1
+let g:ale_set_signs = 1
+
+let b:ale_fixers = {'python': ['ruff', 'pyright']}
+
+" Stops polyglot from screwing up trailing whitespace highlighting in Neovim
+" Use vim-better-whitespace instead
+let g:python_highlight_space_errors = 0
+
+nnoremap <leader>t <cmd>Telescope find_files<cr>
+nnoremap <leader>g <cmd>Telescope live_grep<cr>
+nnoremap <leader>b <cmd>Telescope buffers<cr>
+nnoremap <leader>h <cmd>Telescope help_tags<cr>
+
+"""
+" NEOVIM SPECIFIC CONFIG
+"""
+
+lua <<EOF
+require'colorizer'.setup {
+    filetypes = {
+        "vim";
+        "lua";
+        "toml";
+    },
+    user_default_options = {
+        mode = "background";
+        names = false;
+        hsl_fn = true;
+    },
+}
+EOF
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SPLIT PANES
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -301,6 +304,10 @@ nnoremap <c-l> <c-w>l
 map - :split<cr>
 map <Bar> :vsplit<cr>
 
+nnoremap <leader>. :vertical resize +60<cr>
+nnoremap <leader>, <c-w>=
+nnoremap <leader>m :vertical resize -60<cr>
+
 set splitbelow
 set splitright
 
@@ -309,15 +316,6 @@ set splitright
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set spell spelllang=en_us
 set spell!
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" COMMAND-T
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('nvim')
-    :lua vim.keymap.set('n', '<Leader>b', '<Plug>(CommandTBuffer)')
-    :lua vim.keymap.set('n', '<Leader>j', '<Plug>(CommandTJump)')
-    :lua vim.keymap.set('n', '<Leader>t', '<Plug>(CommandT)')
-endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC
@@ -452,3 +450,15 @@ function! SetTestKeys(...)
     exec ':nnoremap tt ' . binding
 endfunction
 command! -nargs=+ -complete=file_in_path SetTest call SetTestKeys(<f-args>)
+command! -nargs=* Pytest call SetTestKeys("pytest", <f-args>)
+
+function! StartConflictResolution (...)
+exec ':Gvdiffsplit!'
+exec ':nnoremap <leader›h :diffget //2<cr>'
+exec ':nnoremap <leader>l :diffget //3<cr>*'
+exec ':vnoremap <leader›h :diffget //2<cr>'
+exec ':vnoremap <leader>l :diffget //3<cr>*'
+exec ':nnoremap <leader>n <C-w>o :w\|:n\|Gvdiffsplit!<cr>'
+exec ':nnoremap <leader>m <C-w>o :N\|Gvdiffsplit!<cr>'
+endfunction
+command! ConfRes call StartConflictResolution ()

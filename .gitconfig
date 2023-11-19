@@ -20,11 +20,15 @@
 	  new = green
 	  whitespace = "#ffff00" reverse
 [alias]
+    po = push origin
+    lo = pull origin
     st = status
     ci = commit --verbose
     co = checkout
     di = diff --find-copies-harder
     dc = diff --find-copies-harder --cached
+    dt = "!f() { nvim -p $(git diff --name-only) +\"tabdo Gdiff $@\" + tabfirst; }; f"
+    lc = ! git diff --name-only | sort | uniq
     amend = commit --amend
     aa = add --all
     ff = merge --ff-only
@@ -57,10 +61,19 @@
     ra = !git r --all
     l = "!. ~/.githelpers && pretty_git_log"
     la = !git l --all
+    lc = ! git diff --name-only | sort | uniq
     b = "!. ~/.githelpers && pretty_git_branch"
     bs = "!. ~/.githelpers && pretty_git_branch_sorted"
     ski = !git stash --keep-index
     cp = cherry-pick
     pf = push --force-with-lease
+    ctags = !.git/hooks/ctags
+    dish = "!. ~/.githelpers $$ git_giff_short"
+    dishv = "!. ~/.githelpers && git_diff_short_verbose"
+    msg = "!. ~/.githelpers && git_show_commit_message"
 [merge]
-    tool = vimdiff
+    tool = nvimdiff
+[core]
+	editor = nvim
+[pull]
+	rebase = false

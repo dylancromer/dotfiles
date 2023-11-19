@@ -71,3 +71,33 @@ git_page_maybe() {
     fi
 }
 
+git_diff_short () {
+    git di --summary $* | prettygit | column -t -s "$(printf '\t')" \
+        | sed -e 's/^/ /' \
+        | less --quit-if-one-screen --no-init --RAW-CONTROL-CHARS --chop-long-lines
+}
+
+
+git_show_commit_message () {
+    git log --format=%B -n 1 $* | cat
+}
+
+
+git_diff_short_verbose () {
+    COMMIT_NEW-$1
+    COMMIT_OLD-$2
+    RED='\033[0;31m'
+    GREEN='\033[0;32m'
+    YELLOW='\033[0;33m'
+    BLUE='\033[0;34m'
+    PURPLE='\033[0;35m'
+    CYAN='\033[0;36m'
+    NOCOLOR='\033[0m'
+
+    echo ""
+    (echo "From: $YELLOWSCOMMIT_OLD$NOCOLOR" & echo "  ($(git_show_commit_message $COMMIT_OLD))"\
+        && echo "To:  $YELLOW$COMMIT_NEW$NOCOLOR" \
+        && echo "  ($(git_show_commit_message $COMMIT_NEW))") \
+        | sed '/^[[:space:]]*$/d'
+    git_diff_short $*
+}
